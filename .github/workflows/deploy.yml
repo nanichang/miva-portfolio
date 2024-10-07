@@ -9,25 +9,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout the repository
+      # Step 1: Checkout the repository
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      # Setup Node.js if you need to build the static website (optional)
+      # Step 2: Setup Node.js environment (only needed if you're building a Node.js project)
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16' # Use the Node.js version needed for your project
+          node-version: '16' # Use the Node.js version required for your project
 
-      # Install dependencies and build the website (adjust if necessary)
-      - name: Install Dependencies and Build
-        run: |
-          npm install
-          npm run build
+          # Step 3: Install project dependencies
+      - name: Install Dependencies
+        run: npm install
 
-      # Deploy to GitHub Pages
+      # Step 4: Build the static site (change this according to your project's build command)
+      - name: Build Project
+        run: npm run build
+
+      # Step 5: Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build # Adjust to your build output directory
+          publish_dir: ./dist  # This is where your build outpu
